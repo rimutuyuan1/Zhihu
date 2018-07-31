@@ -1,0 +1,186 @@
+/*
+* 公共CSS样式定义
+*
+* @author zhuyong
+*/
+
+#register{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.container_location{
+    margin-top: 20px;
+}
+
+/*行距*/
+.row_margin{
+    margin-top: 30px;
+}
+
+.row_margin2{
+    margin-top: 15px;
+}
+
+.row_margin3{
+    margin-top: 40px;
+}
+
+/*标语*/
+#solgan{
+    font-family:'jdzhonyuanjian1213553c171ce6f';
+    font-size:35px;
+    color:#1E9FFF;
+    text-align: center;
+}
+
+/*提问问题标题*/
+#quetitle{
+    font-family:'jdzhonyuanjian1213553c171ce6f';
+    font-size:25px;
+    text-align: center;
+}
+
+.questitle{
+    font-family:'jdzhonyuanjian1213553c171ce6f';
+    font-size:25px;
+}
+
+#recont{
+    margin-top: 40px;
+}
+
+/*注册登录等提示语*/
+.label{
+    font-family: Tahoma,Helvetica,"Microsoft Yahei","微软雅黑",Arial,STHeiti;
+    font-size: 25px;
+    color: #666;
+}
+
+.label2{
+    font: 15px Helvetica Neue,Helvetica,PingFang SC,微软雅黑,Tahoma,Arial,sans-serif;
+    margin-top: 10px;
+}
+
+/*登录失败提醒样式*/
+.error{
+    color: red;
+}
+
+/*问题标题*/
+.question_title{
+    height: 100px;
+}
+
+/*用户头像及昵称所在父容器*/
+.userHeadParentElement{
+    display:flex;/*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items:center;/*指定垂直居中*/
+}
+
+/*用户头像样式*/
+.userSmallHead{
+    width: 28px;
+    height:28px;
+    border-radius:5px;
+}
+.userMiddleHead{
+    width: 47px;
+    height:47px;
+    border-radius:5px;
+}
+.userBigHead{
+    width: 150px;
+    height:150px;
+    border-radius:5px;
+}
+
+/*用户昵称样式*/
+.userName{
+    font-family:'Source-Han-Ligh12542fa0dc1ce6f';
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #404040;
+}
+.indexUserName{
+    font-family:'Source-Han-Ligh12542fa0dc1ce6f';
+    font-size: 16px;
+    font-weight: bold;
+    color: #404040;
+}
+
+.userNameBig{
+    font-family:'CTBiaoSongSJ12544e75221ce6f';
+    font-size: 25px;
+    font-weight: bold;
+    color: #292929;
+}
+
+/*用户签名样式*/
+.userSignature{
+    font-family:'HanWangYenThin-12543decf41ce6f';
+    font-size: 13px;
+    margin-left: 15px;
+    margin-top: 3px;
+}
+.indexUserSignature{
+    font-family:'HanWangYenThin-12543decf41ce6f';
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+/*展示问题详情时问题标题样式*/
+.questionDetailTitle{
+    font-family:'CTBiaoSongSJ12544e75221ce6f';
+    font-size: large;
+    font-weight: bold;
+    color: #292929;
+}
+/*展示问题详情时问题内容样式*/
+.questionDetailText , .hotanwer{
+    margin-top: 10px;
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+    font-size: 15px;
+    color: #1a1a1a;
+}
+
+/*查看全文*/
+.read-more{
+    color: #175199
+}
+
+/*问题评论、分享*/
+.questionAction{
+    margin-top: 15px;
+    color: #77839c;
+    display:flex;/*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items:center;/*指定垂直居中*/
+}
+
+.item-margin{
+    margin-left: 30px;
+}
+
+/*点赞按钮*/
+.starbtn{
+    color: #0084ff;
+    background-color: rgba(0,132,255,.15);
+}
+
+/*首页导航标题*/
+.navtab{
+    background-color: white;
+    display:flex;/*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items:center;/*指定垂直居中*/
+}
+.usernavtab{
+    background-color: white;
+    border-radius:3px;
+    display:flex;/*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items:center;/*指定垂直居中*/
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <!-- ******************Rabbit 配置文件******************** -->
+
+    <!-- 配置Rabbit连接工厂 -->
+    <rabbit:connection-factory
+            id="connectionFactory"
+            username="${rabbit_username}"
+            password="${rabbit_password}"
+            host="${rabbit_host}"
+            port="${rabbit_port}"/>
+
+    <!--定义Spring Rabbit Template，相当于Rabbit操作对象-->
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"/>
+
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--声明队列：发送注册短信-->
+    <rabbit:queue id="queue_sms" name="queue_sms" durable="true" auto-delete="false" exclusive="false"/>
+    <!--声明队列：日志处理-->
+    <rabbit:queue id="queue_log" name="queue_log" durable="true" auto-delete="false" exclusive="false"/>
+
+    <!--声明队列：检索处理-->
+    <rabbit:queue id="queue_index_question" name="queue_index_question" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue id="queue_index_answer" name="queue_index_answer" durable="true" auto-delete="false" exclusive="false"/>
+
+    <!-- exchange 声明 ， 路由模式 -->
+    <rabbit:direct-exchange name="exchange_direct_sms" durable="true" auto-delete="false">
+        <!--队列绑定-->
+        <rabbit:bindings>
+            <rabbit:binding queue="queue_sms" key="register_sms"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--日志处理队列 ， 路由模式-->
+    <rabbit:direct-exchange name="exchange_direct_log" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="queue_log" key="loginfo"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--内容检索处理队列， 主题模式-->
+    <rabbit:topic-exchange name="exchange_topic_index" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <!--问题处理队列-->
+            <rabbit:binding queue="queue_index_question" pattern="index.question.#"></rabbit:binding>
+            <!--回答处理队列-->
+            <rabbit:binding queue="queue_index_answer" pattern="index.answer.#"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+
+    <!--消息接收者-->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <!--发送短信MQ队列消息处理者-->
+        <rabbit:listener ref="smsMqListener"  queues="queue_sms"/>
+        <!--日志处理者-->
+        <rabbit:listener ref="logMqListener" queues="queue_log"/>
+        <!--问题队列处理-->
+        <rabbit:listener ref="questionMqListener" queues="queue_index_question"/>
+        <!--回答队列处理-->
+        <rabbit:listener ref="answerMqListener" queues="queue_index_answer"/>
+    </rabbit:listener-container>
+</beans>

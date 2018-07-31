@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 需要定义命名空间，值为对应的Mapper接口完全限定名 -->
+<mapper namespace="com.skylaker.yunzhi.mappers.QuestionMapper">
+    <!--查询指定问题列表详细信息-->
+    <select id="getQuestionsList" parameterType="java.lang.String" resultType="question">
+        SELECT
+            Q.*,
+            U.USERNAME,
+            U.SIGNATURE
+        FROM
+            QUESTION  Q
+        JOIN
+            USER      U
+        ON
+            Q.USERID = U.ID
+        WHERE
+            Q.QID IN ( ${qids} )
+        ORDER BY
+            Q.QID DESC
+    </select>
+
+    <!--查询用户提问的问题-->
+    <select id="getUserQuestions" parameterType="pageinfo" resultType="question">
+        SELECT
+            Q.*,
+            COUNT(R.AID) AS answersnum
+        FROM
+            QUESTION  Q
+        LEFT JOIN
+            ANSWER    R
+        ON
+            Q.QID = R.QID
+        WHERE
+            Q.USERID = #{pageInfo.userid}
+        GROUP BY
+            R.QID
+        ORDER BY
+            R.QID DESC
+        LIMIT
+            #{pageInfo.start}, #{pageInfo.pageSize}
+    </select>
+
+</mapper>
