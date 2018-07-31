@@ -74,6 +74,7 @@ public class UserController {
 	 */
 	@LogAnnotation(type = "用户", action = "更新用户信息")
 	@RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+	@ResponseBody
 	public @ResponseBody JSONObject updateUserInfo(@RequestBody User user){
 		return BaseUtil.getResult(userService.updateUserInfo(user));
 	}
